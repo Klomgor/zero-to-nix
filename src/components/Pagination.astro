@@ -1,7 +1,7 @@
 ---
-import Link from "./Link.astro";
-import { startPagePath } from "../lib/utils";
 import { getStartPagesByOrderParam } from "../content/collections";
+import { startPagePath } from "../lib/utils";
+import Link from "./Link.astro";
 
 type Props = {
   order: number;
@@ -27,7 +27,7 @@ const nextPage = startPages.find(
     {
       previousPage && (
         <Link
-          href={startPagePath(previousPage.slug)}
+          href={startPagePath(previousPage.id)}
           class="flex space-x-3 rounded-lg font-semibold"
         >
           <span class="text-gray">&larr;</span>
@@ -44,7 +44,7 @@ const nextPage = startPages.find(
     {
       nextPage && (
         <Link
-          href={startPagePath(nextPage.slug)}
+          href={startPagePath(nextPage.id)}
           class="flex justify-between space-x-3 rounded-full border-1.5 border-primary px-4 py-2 font-semibold hover:bg-pale dark:hover:bg-darker-gray md:px-5 md:py-3"
         >
           <span class="tracking-tight">{nextPage.data.title}</span>

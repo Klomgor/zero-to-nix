@@ -1,4 +1,5 @@
 ---
+import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import ExternalSources from "../../components/ExternalSources.astro";
 import FeedbackBar from "../../components/FeedbackBar.astro";
@@ -19,7 +20,7 @@ import { conceptPagePath } from "../../lib/utils";
 
 export const getStaticPaths = (async () => {
   return (await getConceptPagesAlphabetical()).map((page) => ({
-    params: { slug: page.slug },
+    params: { id: page.id },
     props: { page },
   }));
 }) satisfies GetStaticPaths;
@@ -28,14 +29,14 @@ const { page } = Astro.props;
 const {
   data: { title, snippet, externalSources, related },
 } = page;
-const { Content } = await page.render();
+const { Content } = await render(page);
 
 const relatedConceptPages: { title: string; href: string }[] = (
   await getConceptPagesAlphabetical()
 )
-  .filter(({ slug }) => related.includes(slug))
-  .map(({ slug, data: { title } }) => {
-    return { title, href: conceptPagePath(slug) };
+  .filter(({ id }) => related.includes(id))
+  .map(({ id, data: { title } }) => {
+    return { title, href: conceptPagePath(id) };
   });
 ---
 

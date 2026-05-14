@@ -1,29 +1,29 @@
 ---
-import Link from "./Link.astro";
-import { site } from "../site";
 import { Icon } from "astro-icon/components";
-import DrawerToggler from "./DrawerToggler.astro";
-import HorizontalContainer from "./HorizontalContainer.astro";
-import ThemeSwitcher from "./ThemeSwitcher.astro";
-import Dropdown from "./Dropdown.astro";
 import {
   getConceptPagesAlphabetical,
   getStartPagesByOrderParam,
 } from "../content/collections";
 import { conceptPagePath, startPagePath } from "../lib/utils";
+import { site } from "../site";
 import Drawer from "./Drawer.astro";
+import DrawerToggler from "./DrawerToggler.astro";
+import Dropdown from "./Dropdown.astro";
+import HorizontalContainer from "./HorizontalContainer.astro";
+import Link from "./Link.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
 
 const { title, githubUrl, navbarLinks } = site;
 
 const startPages = (await getStartPagesByOrderParam()).map(
-  ({ slug, data: { title } }) => {
-    return { title, href: startPagePath(slug) };
+  ({ id, data: { title } }) => {
+    return { title, href: startPagePath(id) };
   },
 );
 
 const conceptPages = (await getConceptPagesAlphabetical()).map(
-  ({ slug, data: { title } }) => {
-    return { title, href: conceptPagePath(slug) };
+  ({ id, data: { title } }) => {
+    return { title, href: conceptPagePath(id) };
   },
 );
 ---

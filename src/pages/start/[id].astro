@@ -1,4 +1,5 @@
 ---
+import { render } from "astro:content";
 import type { GetStaticPaths } from "astro";
 import ExternalSources from "../../components/ExternalSources.astro";
 import FeedbackBar from "../../components/FeedbackBar.astro";
@@ -22,7 +23,7 @@ import Layout from "../../layouts/Layout.astro";
 
 export const getStaticPaths = (async () => {
   return (await getStartPagesByOrderParam()).map((page) => ({
-    params: { slug: page.slug.substring(1) },
+    params: { id: page.id.substring(1) },
     props: { page },
   }));
 }) satisfies GetStaticPaths;
@@ -31,7 +32,7 @@ const { page } = Astro.props;
 const {
   data: { title, summary, order },
 } = page;
-const { Content } = await page.render();
+const { Content } = await render(page);
 
 const numQuickStartPages = (await getStartPagesByOrderParam()).length;
 ---
