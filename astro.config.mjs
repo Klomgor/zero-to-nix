@@ -43,5 +43,8 @@ export default defineConfig({
 	site: "https://zero-to-nix.com",
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      tsconfigPaths: false,
+    },
   },
 });
