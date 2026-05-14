@@ -1,70 +1,70 @@
-import fs from "node:fs";
-import path from "node:path";
-import type { APIRoute } from "astro";
-import Handlebars from "handlebars";
 import {
-	getConceptPagesAlphabetical,
-	getStartPagesByOrderParam,
+  getConceptPagesAlphabetical,
+  getStartPagesByOrderParam,
 } from "../content/collections";
 import { conceptPagePath, startPagePath } from "../lib/utils";
 import { site } from "../site";
+import type { APIRoute } from "astro";
+import Handlebars from "handlebars";
+import fs from "node:fs";
+import path from "node:path";
 
 const { url: root, title, description: tagline, llms } = site;
 
 export const FORMATS: Record<
-	string,
-	{ root: string; file: string; description: string }
+  string,
+  { root: string; file: string; description: string }
 > = {
-	standard: {
-		root,
-		file: "llms.txt",
-		description: "the main version",
-	},
-	small: {
-		root,
-		file: "llms-small.txt",
-		description: "compact structure-only version",
-	},
-	full: {
-		root,
-		file: "llms-full.txt",
-		description: "complete content in one file",
-	},
+  standard: {
+    root,
+    file: "llms.txt",
+    description: "the main version",
+  },
+  small: {
+    root,
+    file: "llms-small.txt",
+    description: "compact structure-only version",
+  },
+  full: {
+    root,
+    file: "llms-full.txt",
+    description: "complete content in one file",
+  },
 };
 
 const templateFile = fs.readFileSync(
-	path.join(process.cwd(), "src/templates/llms.txt.hbs"),
-	"utf-8",
+  path.join(process.cwd(), "src/templates/llms.txt.hbs"),
+  "utf-8",
 );
 
 const template = Handlebars.compile(templateFile);
 
 export const GET: APIRoute = async () => {
-	const startPages = await getStartPagesByOrderParam();
-	const conceptPages = await getConceptPagesAlphabetical();
+  const startPages = await getStartPagesByOrderParam();
+  const conceptPages = await getConceptPagesAlphabetical();
 
-	const content = template({
-		root,
-		title,
-		tagline,
-		description: llms.description,
-		startPages: startPages.map(({ data: { title }, id }) => ({
-			title,
-			href: `${root}/${startPagePath(id)}`,
-		})),
-		conceptPages: conceptPages.map(({ data: { title }, id }) => ({
-			title,
-			href: `${root}/${conceptPagePath(id)}`,
-		})),
-		otherFormats: [FORMATS.small, FORMATS.full],
-		projects: llms.otherProjects,
-	});
+  const content = template({
+    root,
+    title,
+    tagline,
+    description: llms.description,
+    startPages: startPages.map(({ data: { title }, id }) => ({
+      title,
+      href: `${root}/${startPagePath(id)}`,
+    })),
+    conceptPages: conceptPages.map(({ data: { title }, id }) => ({
+      title,
+      href: `${root}/${conceptPagePath(id)}`,
+    })),
+    otherFormats: [FORMATS.small, FORMATS.full],
+    projects: llms.otherProjects,
+  });
 
-	return new Response(content, {
-		headers: {
-			"Content-Type": "text/plain; charset=utf-8",
-		},
-	});
+  return new Response(content, {
+    headers: {
+      "Content-Type": "text/plain; charset=utf-8",
+    },
+  });
 };
 
 export const prerender = true;

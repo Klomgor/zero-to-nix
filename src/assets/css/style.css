@@ -51,12 +51,14 @@
   --max-width-8xl: 90rem;
 
   /* ---- Font families ---- */
-  --font-sans: -apple-system, ui-sans-serif, system-ui, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+  --font-sans:
+    -apple-system, ui-sans-serif, system-ui, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: ui-monospace, Menlo, Consolas, SFMono-Regular, Monaco,
-    "Liberation Mono", "Courier New", monospace;
+  --font-mono:
+    ui-monospace, Menlo, Consolas, SFMono-Regular, Monaco, "Liberation Mono",
+    "Courier New", monospace;
 }
 
 /* Mailchimp embed styling */
@@ -71,18 +73,18 @@
 }
 
 @utility banner-link {
-  @apply font-semibold duration-hover hover:text-nix-light-blue;
+  @apply duration-hover hover:text-nix-light-blue font-semibold;
 }
 
 @utility inline-code {
-  @apply rounded border-light-gray bg-pale px-1.5 py-0.5 dark:border-none dark:bg-dark-gray;
+  @apply border-light-gray bg-pale dark:bg-dark-gray rounded px-1.5 py-0.5 dark:border-none;
 }
 
 @layer base {
   /* This class is applied to snippets of text that are rendered from Markdown but not covered by .prose */
   .content {
     a {
-      @apply font-medium underline hover:text-primary dark:hover:text-primary;
+      @apply hover:text-primary dark:hover:text-primary font-medium underline;
     }
 
     p + p {
@@ -147,7 +149,7 @@
     }
 
     a {
-      @apply underline hover:text-primary dark:hover:text-light-blue;
+      @apply hover:text-primary dark:hover:text-light-blue underline;
     }
 
     code {
