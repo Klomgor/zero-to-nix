@@ -5,9 +5,6 @@
 /* darkMode: "class" */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* screens: { print: { raw: "print" } } */
-@custom-variant print (@media print);
-
 @theme {
   /* ---- Colors ---- */
   --color-pale: #f8fafc;
