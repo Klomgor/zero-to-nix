@@ -2,7 +2,7 @@ import alpinejs from "@astrojs/alpinejs";
 import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@tailwindcss/vite";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
@@ -42,6 +42,6 @@ export default defineConfig({
 	},
 	site: "https://zero-to-nix.com",
   vite: {
-    plugins: [tailwind()],
+    plugins: [tailwindcss()],
   },
 });

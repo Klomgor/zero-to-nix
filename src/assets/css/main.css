@@ -1,6 +1,130 @@
-@import "variables.css";
-@import "prose.css";
-@import "tailwind.css";
+@import "tailwindcss";
+
+@theme {
+  --primary: rgb(80, 116, 191); /* Determinate Systems color */
+  --dark: rgb(10, 10, 10);
+
+  /* Tailwind colors */
+  /* Drawn from: https://tailwindcss.com/docs/customizing-colors */
+  --pale: #f8fafc; /* slate-50 */
+  --pale-yellow: #fefce8; /* yellow-50 */
+  --middle-yellow: #fef08a; /* yellow-200 */
+  --yellow: #eab308; /* yellow-500 */
+  --dark-yellow: #ca8a04; /* yellow-600 */
+  --soft-gray: #e2e8f0; /* slate-200 */
+  --light-gray: #cbd5e1; /* slate-300 */
+  --gray: #64748b; /* slate-500 */
+  --dark-gray: #334155; /* slate-700 */
+  --darker-gray: #1e293b; /* slate-800 */
+  --pale-blue: #eff6ff; /* blue-50 */
+  --middle-blue: #bfdbfe; /* blue-200 */
+  --light-blue: #93c5fd; /* blue-300 */
+  --blue: #3b82f6; /* blue-500 */
+  --pale-green: #f0fdf4; /* green-50 */
+  --middle-green: #bbf7d0; /* green-200 */
+  --green: #22c55e; /* green-500 */
+  --pale-red: #fef2f2; /* red-50 */
+  --middle-red: #fecaca; /* red-200 */
+  --red: #ef4444; /* red-500 */
+  --cerulean: #0ea5e9; /* sky-500 */
+  --lilac: #a855f7; /* purple-500 */
+  --rose: #f43f5e; /* rose-500 */
+  --orange: #f97316; /* orange-500 */
+  --light-orange: #fff7ed; /* orange-50 */
+  --nix-light-blue: #5a76be;
+  --nix-dark-blue: #536db0;
+}
+
+@layer base {
+  /* Helper classes */
+  .inline-code {
+    @apply rounded border-light-gray bg-pale px-1.5 py-0.5 dark:border-none dark:bg-dark-gray;
+  }
+
+  .banner-link {
+    @apply font-semibold duration-hover hover:text-nix-light-blue;
+  }
+
+  /* This class is applied to snippets of text that are rendered from Markdown but not covered by .prose */
+  .content {
+    a {
+      @apply font-medium underline hover:text-primary dark:hover:text-primary;
+    }
+
+    p + p {
+      @apply mt-2 md:mt-2.5 lg:mt-3;
+    }
+
+    code {
+      @apply inline-code;
+    }
+  }
+
+  .prose {
+    /* Headings */
+    h2,
+    h3,
+    h4 {
+      &::before {
+        display: block;
+        content: " ";
+        margin-top: -5rem;
+        height: 5rem;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      &.heading a {
+        @apply font-semibold no-underline;
+      }
+    }
+
+    /* Hide footnotes heading */
+    .footnotes {
+      @apply mt-12 p-0;
+
+      h2#footnote-label {
+        @apply text-lg md:text-xl lg:text-2xl;
+      }
+
+      .data-footnote-backref {
+        @apply no-underline;
+      }
+    }
+
+    /* Needed by a few components */
+    .remove-underline {
+      a {
+        @apply no-underline;
+      }
+    }
+
+    p,
+    .content,
+    h2,
+    h3 {
+      code {
+        @apply inline-code;
+      }
+    }
+
+    a {
+      @apply underline hover:text-primary dark:hover:text-light-blue;
+    }
+
+    code {
+      &::before,
+      &::after {
+        content: "";
+      }
+    }
+
+    .admonition {
+      @apply my-4;
+    }
+  }
+}
+
 
 /* Mailchimp embed styling */
 #mc_embed_signup {
@@ -10,8 +134,4 @@
 
 [x-cloak] {
   display: none !important;
-}
-
-.banner-link {
-  @apply font-semibold duration-hover hover:text-nix-light-blue;
 }
