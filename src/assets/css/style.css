@@ -108,8 +108,12 @@
         pointer-events: none;
       }
 
+      a {
+        @apply no-underline;
+      }
+
       &.heading a {
-        @apply font-semibold no-underline;
+        @apply font-semibold;
       }
     }
 
