@@ -94,28 +94,6 @@
   }
 
   .prose {
-    /* Headings */
-    h2,
-    h3,
-    h4 {
-      &::before {
-        display: block;
-        content: none;
-        margin-top: -5rem;
-        height: 5rem;
-        visibility: hidden;
-        pointer-events: none;
-      }
-
-      a {
-        @apply no-underline;
-      }
-
-      &.heading a {
-        @apply font-semibold;
-      }
-    }
-
     /* Hide footnotes heading */
     .footnotes {
       @apply mt-12 p-0;
@@ -146,7 +124,7 @@
     }
 
     a {
-      @apply hover:text-primary dark:hover:text-light-blue underline;
+      @apply hover:text-primary dark:hover:text-light-blue;
     }
 
     code {

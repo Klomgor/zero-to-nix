@@ -16,6 +16,7 @@ import NixStorePath from "../../components/mdx/NixStorePath.astro";
 import Platforms from "../../components/mdx/Platforms.astro";
 import SpecificLanguage from "../../components/mdx/SpecificLanguage.astro";
 import Pagination from "../../components/Pagination.astro";
+import Prose from "../../components/Prose.astro";
 import Separator from "../../components/Separator.astro";
 import Summary from "../../components/Summary.astro";
 import { getStartPagesByOrderParam } from "../../content/collections";
@@ -50,7 +51,7 @@ const numQuickStartPages = (await getStartPagesByOrderParam()).length;
     <div class="space-y-6">
       {summary && summary.length > 0 && <Summary items={summary} />}
 
-      <div class="prose dark:prose-invert lg:prose-lg xl:prose-xl max-w-none">
+      <Prose>
         <Content
           components={{
             h2: H2,
@@ -67,7 +68,7 @@ const numQuickStartPages = (await getStartPagesByOrderParam()).length;
             SpecificLanguage,
           }}
         />
-      </div>
+      </Prose>
 
       <div class="mt-16 space-y-12">
         <Pagination {order} />
